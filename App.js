@@ -1,15 +1,37 @@
 import React, { Component } from "react";
 import {StyleSheet,Text,View,Image,ActivityIndicator,StatusBar} from "react-native";
 import Weather from "./Weather";
-import { Ionicons } from "@expo/vector-icons";
+
+const API_KEY = "6a02793735b1a0345302e08138de80f6" ;
 
 export default class App extends Component {
   state = {
-    isLoaded: true
+    isLoaded: false,
+    error : null
+  };
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+        position => {
+          this._getWeather(position.coords.latitude , position.coords.longitude )
+      },
+      error => {
+        this.setState({
+          error: error
+        });
+  });
+}
+
+
+  _getWeather = (lat,lon) => {
+    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`)
+    .then(response => response.json())
+      .then(json => {console.log(json)
+      });
   };
 
   render() {
-    const { isLoaded } = this.state;
+    const { isLoaded ,error } = this.state;
 
     return (
       <View style={styles.container}>
@@ -39,7 +61,7 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: 38,
-    marginBottom: 100
+    marginBottom: 24 
   }
 });
 

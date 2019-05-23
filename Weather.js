@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 export default class Weather extends Component {
   render() {
     return (
-      <LinearGradient colors={["#00C6FB", "#005BEA","red"]} style={styles.container}>
+      <LinearGradient colors={["#00C6FB", "#005BEA"]} style={styles.container}>
         <View style={styles.upper}>
           <Ionicons color="white" size={144} name="ios-rainy"/>
           <Text style={styles.temp}>35°C</Text>
