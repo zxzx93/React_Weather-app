@@ -4,6 +4,7 @@ import Weather from "./Weather";
 
 const API_KEY = "6a02793735b1a0345302e08138de80f6";
 
+
 export default class App extends Component {
   state = {
     isLoaded: false,
@@ -12,13 +13,12 @@ export default class App extends Component {
     name : null
   };
 
+//37.499783, 127.031950
+//navigator.geolocation.getCurrentPosition(success, error, options);
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
-        /* this.setState({
-        error : "somthing went wrong"
-        }); */
-        this._getWeather( position.coords.latitude , position.coords.longitude ); //경도,위도
+          this._getWeather( position.coords.latitude , position.coords.longitude ); //경도,위도
       },
       error => {
         this.setState({
@@ -48,7 +48,7 @@ export default class App extends Component {
 
       <View style={styles.container}>
         <StatusBar hidden={true} />
-        {isLoaded ? (<Weather WeatherName={"Rain"} temp={Math.ceil(temperature- 273.15)}/>) //Math.floor(1.87)이란 숫자를 내림으로 처리함 <-> Math.ceil():자리 올림
+        {isLoaded ? (<Weather WeatherName={"Rain"} temp={Math.ceil(temperature - 273.15)}/>) //Math.floor(1.87)이란 숫자를 내림으로 처리함 <-> Math.ceil():자리 올림
           : <View style={styles.loading}>
               <Text style={styles.loadingText}>Getting the fucking weather</Text>
               { error ? <Text style={styles.errorText}>{error}</Text> : null }
@@ -56,7 +56,7 @@ export default class App extends Component {
       </View>
     );
   }
-}
+} 
 
 const styles = StyleSheet.create({
   container: {
