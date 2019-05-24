@@ -42,12 +42,13 @@ export default class App extends Component {
   }; 
 
   render() {
-    const { isLoaded, error } = this.state;    
+    const { isLoaded, error , temperature , name } = this.state;    
 
     return (
+
       <View style={styles.container}>
         <StatusBar hidden={true} />
-        {isLoaded ? (<Weather />)
+        {isLoaded ? (<Weather WeatherName={"Rain"} temp={Math.ceil(temperature- 273.15)}/>) //Math.floor(1.87)이란 숫자를 내림으로 처리함 <-> Math.ceil():자리 올림
           : <View style={styles.loading}>
               <Text style={styles.loadingText}>Getting the fucking weather</Text>
               { error ? <Text style={styles.errorText}>{error}</Text> : null }
