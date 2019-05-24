@@ -72,7 +72,7 @@ import PropTypes from "prop-types";
     subtitle : "It's like you have no glasses on",
     icon : "weather-fog",
    }
-  };
+  };      
 
 //함수형 
 export default function Weather({WeatherName ,temp}) {  
