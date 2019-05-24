@@ -2,20 +2,23 @@ import React, { Component } from "react";
 import {StyleSheet,Text,View,Image,ActivityIndicator,StatusBar} from "react-native";
 import Weather from "./Weather";
 
-     //const API_KEY = "6a02793735b1a0345302e08138de80f6";
+const API_KEY = "6a02793735b1a0345302e08138de80f6";
 
 export default class App extends Component {
   state = {
-    isLoaded: true,
-    error: null
+    isLoaded: false,
+    error: null,
+    temperature : null,
+    name : null
   };
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
-        this.setState({
+        /* this.setState({
         error : "somthing went wrong"
-        });
+        }); */
+        this._getWeather( position.coords.latitude , position.coords.longitude ); //경도,위도
       },
       error => {
         this.setState({
@@ -25,18 +28,21 @@ export default class App extends Component {
     );
   }
 
-/*   _getWeather = (lat, lon) => {
-    fetch(
-      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`
-    )
+  _getWeather = (lat, lon) => {
+    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`)
       .then(response => response.json())
       .then(json => {
         console.log(json);
+        this.setState({ 
+          temperature : json.main.temp,
+          name : json.weather[0].main,
+          isLoaded : true
+        });
       });
-  }; */
+  }; 
 
   render() {
-    const { isLoaded, error } = this.state;
+    const { isLoaded, error } = this.state;    
 
     return (
       <View style={styles.container}>
