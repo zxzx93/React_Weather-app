@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {StyleSheet,Text,View,Image,ActivityIndicator,StatusBar} from "react-native";
 import Weather from "./Weather";
 
+
 const API_KEY = "6a02793735b1a0345302e08138de80f6";
 
 
@@ -15,10 +16,11 @@ export default class App extends Component {
 
 //37.499783, 127.031950
 //navigator.geolocation.getCurrentPosition(success, error, options);
-  componentDidMount() {
+   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
           this._getWeather( position.coords.latitude , position.coords.longitude ); //경도,위도
+           //console.log(position);
       },
       error => {
         this.setState({
@@ -48,7 +50,7 @@ export default class App extends Component {
 
       <View style={styles.container}>
         <StatusBar hidden={true} />
-        {isLoaded ? (<Weather WeatherName={"Rain"} temp={Math.ceil(temperature - 273.15)}/>) //Math.floor(1.87)이란 숫자를 내림으로 처리함 <-> Math.ceil():자리 올림
+        {isLoaded ? (<Weather WeatherName={name} temp={Math.ceil(temperature - 273.15)}/>) //Math.floor(1.87)이란 숫자를 내림으로 처리함 <-> Math.ceil():자리 올림
           : <View style={styles.loading}>
               <Text style={styles.loadingText}>Getting the fucking weather</Text>
               { error ? <Text style={styles.errorText}>{error}</Text> : null }

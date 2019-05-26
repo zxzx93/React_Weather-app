@@ -55,7 +55,7 @@ import PropTypes from "prop-types";
     icon : "weather-snowy",
    },
    Drizzle : {
-    colors :["#89F7FE", "#66A6FF"],
+    colors :["#89F7FE", "#66A6FF"], 
     title : "Drizzle",
     subtitle : "It's like rain, but gay",
     icon : "weather-hail",
